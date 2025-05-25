@@ -41,12 +41,12 @@
       light1.position.set(5, 10, 7.5);
       scene.add(light1);
 
-      const light2 = new THREE.AmbientLight(0x404040); // soft light
+      const light2 = new THREE.AmbientLight(0x404040);
       scene.add(light2);
 
       const loader = new GLTFLoader();
       loader.load(
-        'RW_BOARD.glb',
+        'RW_BOARD.glb', // Ensure this is exactly the name of your file
         function (gltf) {
           scene.add(gltf.scene);
         },
