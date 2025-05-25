@@ -14,12 +14,12 @@
     </style>
   </head>
   <body>
+    <!-- Three.js and dependencies via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/controls/OrbitControls.js"></script>
 
     <script>
-      // Set up scene
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0xf0f0f0);
 
@@ -35,15 +35,15 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
-      // Add lighting
-      const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
-      scene.add(light);
+      // Lights
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
+      scene.add(hemiLight);
 
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(5, 10, 7.5);
-      scene.add(directionalLight);
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+      dirLight.position.set(5, 10, 7.5);
+      scene.add(dirLight);
 
-      // Load GLB model
+      // Load model
       const loader = new THREE.GLTFLoader();
       loader.load(
         './RW_BOARD.glb',
@@ -53,21 +53,18 @@
         },
         undefined,
         function (error) {
-          console.error('An error occurred while loading the model:', error);
+          console.error('Error loading model:', error);
         }
       );
 
-      // Controls
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-      // Handle resize
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
-      // Animate
       function animate() {
         requestAnimationFrame(animate);
         controls.update();
