@@ -46,9 +46,10 @@
 
       const loader = new GLTFLoader();
       loader.load(
-        'RW_BOARD.glb', // Ensure this is exactly the name of your file
+        './RW_BOARD.glb',
         function (gltf) {
           scene.add(gltf.scene);
+          console.log('GLB loaded');
         },
         undefined,
         function (error) {
